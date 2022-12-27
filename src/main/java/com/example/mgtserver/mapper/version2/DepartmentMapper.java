@@ -20,7 +20,7 @@ public interface DepartmentMapper {
     @SelectProvider(type = DepartmentProvider.class, method = "query")
     List<Department> query(Department department);
 
-    @DeleteProvider(type = DepartmentProvider.class, method = "delete")
-    Integer delete(Long id);
+    @Update("UPDATE department SET is_disable = 1, gmt_modify = #{currentTime} WHERE id = #{id} AND is_deleted = 0 LIMIT 1")
+    Integer delete(Long id, Long currentTime);
 
 }

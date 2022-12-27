@@ -25,15 +25,20 @@ public class DepartmentService {
     }
 
     public int create(Department department) {
+
+        department.setGmtCreate(System.currentTimeMillis());
+        department.setGmtModify(System.currentTimeMillis());
+
         return departmentMapper.insert(department);
     }
 
     public int update(Department department) {
+        department.setGmtModify(System.currentTimeMillis());
         return departmentMapper.update(department);
     }
 
 
     public int remove(Long id) {
-        return departmentMapper.delete(id);
+        return departmentMapper.delete(id, System.currentTimeMillis());
     }
 }

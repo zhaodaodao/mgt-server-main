@@ -5,7 +5,7 @@ import org.apache.ibatis.jdbc.SQL;
 
 public class DepartmentProvider {
 
-    private static final String TABLE_NAME = "t_department";
+    private static final String TABLE_NAME = "department";
 
     public String insert(Department department) {
         return new SQL(){{
@@ -14,6 +14,9 @@ public class DepartmentProvider {
             VALUES("manager", "#{manager}");
             VALUES("address", "#{address}");
             VALUES("user_count", "#{userCount}");
+            VALUES("is_disable", "#{isDisable}");
+            VALUES("gmt_create", "#{gmtCreate}");
+            VALUES("gmt_modify", "#{gmtModify}");
         }}.toString();
     }
 
@@ -31,6 +34,12 @@ public class DepartmentProvider {
             }
             if (department.getUserCount() != null) {
                 SET("user_count = #{userCount}");
+            }
+            if (department.getIsDisable() != null) {
+                SET("is_disable = #{isDisable}");
+            }
+            if (department.getGmtModify() != null) {
+                SET("gmt_modify = #{gmtModify}");
             }
             WHERE("id = #{id}");
         }}.toString();
@@ -55,15 +64,10 @@ public class DepartmentProvider {
             if (department.getUserCount() != null) {
                 WHERE("user_count = #{userCount}");
             }
+            if (department.getIsDisable() != null) {
+                WHERE("is_disable = 0");
+            }
         }}.toString();
     }
 
-    public String delete(Long id) {
-        return new SQL(){{
-          DELETE_FROM(TABLE_NAME);
-          WHERE("id = #{id}");
-
-
-        }}.toString();
-    }
 }

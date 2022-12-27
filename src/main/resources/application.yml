@@ -6,7 +6,7 @@ spring:
       max-file-size: 2GB
       max-request-size: 2GB
   profiles:
-    active: dev
+    active: test
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #数据池
     #    driver-class-name: com.mysql.cj.jdbc.Driver #数据库驱动程序
